@@ -59,9 +59,9 @@ function start(file) {
 
 start('main.js')
 
-// Puerto falso para Render
+// Puerto falso para Railway
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8080
 app.get('/', (req, res) => res.send('YakoBot Online'))
-app.listen(port, () => console.log(Servidor web falso activo en puerto ${port}))
+app.listen(port, () => console.log(Servidor web activo en puerto ${port}))
