@@ -2,6 +2,7 @@
   "name": "games-wabot",
   "version": "0.9.8",
   "main": "index.js",
+  "author": "Yako",
   "engines": {
     "node": "20.x"
   },
