@@ -57,8 +57,6 @@ function start(file) {
   // console.log(p)
 }
 
-start('main.js')
-
 // Puerto falso para Railway
 const express = require('express')
 const app = express()
