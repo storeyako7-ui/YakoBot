@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "Katarime.js",
   "scripts": {
-    "start": "node Katarime.js"
+    "start": "node Katanime.js"
   },
   "engines": {
     "node": "20.x"
