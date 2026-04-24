@@ -2,7 +2,7 @@ console.log('Starting...')
 let { spawn } = require('child_process')
 let path = require('path')
 let fs = require('fs')
-let pkg = require('./pkg.json')
+let pkg = require('./package.json')
 const CFonts  = require('cfonts')
 CFonts.say('Lightweight\nWhatsApp Bot', {
   font: 'chrome',
