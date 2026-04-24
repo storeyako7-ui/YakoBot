@@ -1,10 +1,11 @@
-console.log('Starting...')
+console.log('Starting YakoBot...')
 let { spawn } = require('child_process')
 let path = require('path')
 let fs = require('fs')
 let pkg = require('./package.json')
+var isRunning = false
 console.log('Starting YakoBot...')
-console.log(Bot name: ${pkg.name})
+console.log('Bot name:', pkg.name)
 var isRunning = false
 /**
  * Start a js file
