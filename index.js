@@ -9,7 +9,7 @@ CFonts.say('Lightweight\nWhatsApp Bot', {
   align: 'center',
   gradient: ['red', 'magenta']
 })
-CFonts.say(`'${pkg.name}' By @${pkg.author.name || pkg.author}`, {
+CFonts.say(`'${pkg.name}' , {
   font: 'console',
   align: 'center',
   gradient: ['red', 'magenta']
