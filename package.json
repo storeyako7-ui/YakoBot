@@ -2,7 +2,6 @@
   "name": "yakobot",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "node index.js"
   },
@@ -14,6 +13,7 @@
     "pino": "^8.17.0",
     "fs-extra": "^11.2.0",
     "node-fetch": "^2.7.0",
-    "chalk": "^4.1.2"
+    "chalk": "^4.1.2",
+    "cfonts": "^3.1"
   }
 }
