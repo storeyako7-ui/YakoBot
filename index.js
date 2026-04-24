@@ -1,3 +1,4 @@
+// YakoBot QR Fix - April 2026
 console.log('Starting YakoBot...')
 const { default: makeWASocket, DisconnectReason, useMultiFileAuthState } = require('@whiskeysockets/baileys')
 const { Boom } = require('@hapi/boom')
