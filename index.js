@@ -1,56 +1,36 @@
 console.log('Starting YakoBot...')
-let { spawn } = require('child_process')
-let path = require('path')
+let { default: makeWASocket, DisconnectReason, useMultiFileAuthState } = require('@whiskeysockets/baileys')
+let { Boom } = require('@hapi/boom')
+let qrcode = require('qrcode-terminal')
 let fs = require('fs')
-let pkg = require('./package.json')
-var isRunning = false
-console.log('Starting YakoBot...')
-console.log('Bot name:', pkg.name)
-var isRunning = false
-/**
- * Start a js file
- * @param {String} file `path/to/file`
- */
-function start(file) {
-  if (isRunning) return
-  isRunning = true
-  let args = [path.join(__dirname, file), ...process.argv.slice(2)]
-  CFonts.say([process.argv[0], ...args].join(' '), {
-    font: 'console',
-    align: 'center',
-    gradient: ['red', 'magenta']
-  })
-  let p = spawn(process.argv[0], args, {
-    stdio: ['inherit', 'inherit', 'inherit', 'ipc']
-  })
-  p.on('message', data => {
-    console.log('[RECEIVED]', data)
-    switch (data) {
-      case 'reset':
-        p.kill()
-        isRunning = false
-        start.apply(this, arguments)
-        break
-      case 'uptime':
-        p.send(process.uptime())
-        break
-    }
-  })
-  p.on('exit', code => {
-    isRunning = false
-    console.error('Exited with code:', code)
-    if (code === 0) return
-    fs.watchFile(args[0], () => {
-      fs.unwatchFile(args[0])
-      start(file)
+let path = require('path')
+
+async function connectToWhatsApp() {
+    const { state, saveCreds } = await useMultiFileAuthState('auth_info_baileys')
+    
+    const sock = makeWASocket({
+        auth: state,
+        printQRInTerminal: true
     })
-  })
-  // console.log(p)
+
+    sock.ev.on('connection.update', (update) => {
+        const { connection, lastDisconnect, qr } = update
+        if(qr) {
+            console.log('Escanea este QR:')
+            qrcode.generate(qr, {small: true})
+        }
+        if(connection === 'close') {
+            const shouldReconnect = (lastDisconnect.error)?.output?.statusCode !== DisconnectReason.loggedOut
+            console.log('Conexion cerrada. Reconectando...', shouldReconnect)
+            if(shouldReconnect) {
+                connectToWhatsApp()
+            }
+        } else if(connection === 'open') {
+            console.log('YakoBot conectado a WhatsApp ✅')
+        }
+    })
+
+    sock.ev.on('creds.update', saveCreds)
 }
 
-// Puerto falso para Railway
-const express = require('express')
-const app = express()
-const port = process.env.PORT || 8080
-app.get('/', (req, res) => res.send('YakoBot Online'))
-app.listen(port, () => console.log('Servidor web activo en puerto ${port}'))
+connectToWhatsApp()
