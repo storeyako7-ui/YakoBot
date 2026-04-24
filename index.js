@@ -3,18 +3,8 @@ let { spawn } = require('child_process')
 let path = require('path')
 let fs = require('fs')
 let pkg = require('./package.json')
-const CFonts  = require('cfonts')
-CFonts.say('Lightweight\nWhatsApp Bot'), {
-  font: 'chrome',
-  align: 'center',
-  gradient: ['red', 'magenta']
-})
-CFonts.say(`'${pkg.name}' , {
-  font: 'console',
-  align: 'center',
-  gradient: ['red', 'magenta']
-})
-
+console.log('Starting YakoBot...')
+console.log(Bot name: ${pkg.name})
 var isRunning = false
 /**
  * Start a js file
